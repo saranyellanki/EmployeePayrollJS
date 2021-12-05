@@ -37,8 +37,33 @@ function workingHrs(attendence){
 function calculateWage(empHrs){
     return WAGE_PER_HOUR * empHrs
 }
+let day = 0;
 console.log("Employee Present Part time = "+partTimeCount+" days");
 console.log("Employee Present Full time = "+fullTimeCount+" days");
 console.log("Employee Absent = "+absentCount+" days");
 console.log("Total Days : "+totalWorkingDays+" ,Total hours : "+totalEmpHrs);
+
+//UC 7B Using array map helper function
+let mapArr = empDailyWageArray.map(dailyWage => "Day "+day++ +" Wage = "+dailyWage)
+console.log(mapArr);
+
+//UC 7C using filter method
+console.log("Days when only full time Wage is earned by filter method");
+let fullDayWage = mapArr.filter(dailyWage => dailyWage.includes(160));
+console.log(fullDayWage);
+
+//UC 7D find first occurrence when full time Wage was earned
+console.log(mapArr.find(dailyWage => dailyWage.includes(160)));
+
+//UC 7E check if every element of full time wage is holding full time wage only
+console.log(fullDayWage.every(dailyWage => dailyWage.includes(160)));
+
+//UC 7F Check if any part time Wage
+console.log(mapArr.some(dailyWage => dailyWage.includes(80)));
+
+//UC 7G Find number of days employee worked
+let workingDays = empDailyWageArray.filter(dailyWage => dailyWage>0);
+console.log("Number of days Employee worked = "+workingDays.length);
+
+//UC 7A Total wage calculated by reduce function
 console.log("Total Wage for a month = "+empDailyWageArray.reduce((totalWage,dailyWage) => totalWage+dailyWage));
