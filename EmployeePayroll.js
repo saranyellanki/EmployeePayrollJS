@@ -19,15 +19,27 @@ let totalWorkingDays = 0;
 let fullWorkingHours = new Array();
 let partWorkingHours = new Array();
 let noWorkingHours = new Array();
+let empWageAndHrsArr = new Array();
 while (totalEmpHrs<WORKING_HOURS && totalWorkingDays<WORKING_DAYS){
     let attendence = Math.floor(Math.random()*3);
     empHrs = workingHrs(attendence);
     totalEmpHrs += empHrs;
+    empWageAndHrsArr.push(
+        {
+            day : totalWorkingDays,
+            dailyHrs : empHrs,
+            dailyWage : calculateWage(empHrs),
+            toString(){
+                return "\nDay "+this.day+" Working Hours "+this.dailyHrs+" Wage Earned : "+this.dailyWage
+            }, 
+        }
+    );
     empDailyHrsMap.set(totalWorkingDays,empHrs);
     empDailyWageMap.set(totalWorkingDays,calculateWage(empHrs));
     empDailyWageArray.push(calculateWage(empHrs));
     totalWorkingDays++;
 }
+console.log("Daily Hours Worked and Wage Earned : "+empWageAndHrsArr);
 function workingHrs(attendence){
     switch(attendence){
         case PART_TIME :
