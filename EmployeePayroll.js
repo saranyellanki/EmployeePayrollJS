@@ -10,16 +10,20 @@ let totalWage = 0;
 let empHrs = 0;
 let totalEmpHrs=0;
 let empDailyWageArray = new Array();
+let empDailyWageMap = new Map();
+let empDailyHrsMap = new Map();
 let partTimeCount = 0;
 let fullTimeCount = 0;
 let absentCount = 0;
 let totalWorkingDays = 0;
 while (totalEmpHrs<WORKING_HOURS && totalWorkingDays<WORKING_DAYS){
-    totalWorkingDays++;
     let attendence = Math.floor(Math.random()*3);
     empHrs = workingHrs(attendence);
-    totalEmpHrs += workingHrs(attendence);
+    totalEmpHrs += empHrs;
+    empDailyHrsMap.set(totalWorkingDays,empHrs);
+    empDailyWageMap.set(totalWorkingDays,calculateWage(empHrs));
     empDailyWageArray.push(calculateWage(empHrs));
+    totalWorkingDays++;
 }
 function workingHrs(attendence){
     switch(attendence){
@@ -67,3 +71,6 @@ console.log("Number of days Employee worked = "+workingDays.length);
 
 //UC 7A Total wage calculated by reduce function
 console.log("Total Wage for a month = "+empDailyWageArray.reduce((totalWage,dailyWage) => totalWage+dailyWage));
+
+//UC8 Map Functions
+console.log("Total Wage for a month = "+Array.from(empDailyWageMap.values()).reduce((totalWage,dailyWage) => totalWage+dailyWage));
