@@ -93,3 +93,24 @@ console.log("Total Wage for a month = "+Array.from(empDailyWageMap.values()).red
 console.log("Full Time Working days : "+fullWorkingHours);
 console.log("Part Time Working days : "+partWorkingHours);
 console.log("No Working days : "+noWorkingHours);
+
+//UC11A Using Object Functions with arrow functions
+let totalWages = empWageAndHrsArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage>0)
+                                 .reduce( (totalWage,dailyHrsAndWage) => totalWage+dailyHrsAndWage.dailyWage,0);
+
+let totalHrs = empWageAndHrsArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHrs>0)
+                               .reduce((totalHrs,dailyHrsAndWage)=>totalHrs+dailyHrsAndWage.dailyHrs,0)
+
+console.log("Total Hours : "+totalHrs+ ", Total Wage : "+totalWages);
+
+//UC 11B Full working days
+empWageAndHrsArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHrs==8)
+                .forEach(dailyHrsAndWage => console.log(dailyHrsAndWage.toString()));
+
+//UC 11C Part working days
+empWageAndHrsArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyHrs==4)
+                .forEach(dailyHrsAndWage => console.log(dailyHrsAndWage.toString()));
+
+//UC 11D No working days
+empWageAndHrsArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyHrs==0)
+                .forEach(dailyHrsAndWage => console.log(dailyHrsAndWage.toString()));
